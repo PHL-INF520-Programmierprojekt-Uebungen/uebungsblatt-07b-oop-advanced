@@ -1,4 +1,5 @@
 # Übungsblatt: Objektorientierte Programmierung – Abstraktion und Interfaces
+[Link to English version](./README_en.md)
 
 Voraussetzungen: konkrete Vererbung, Überschreiben und Zusammensetzung aus ÜB 07a. Beginnen Sie mit dem Mitarbeiterbeispiel. Die Fahrzeuge festigen dieselben Konzepte. Danach vergleichen Sie diese mit einem Interface beim Strategy-Muster. Generics bilden einen eigenständigen Vertiefungsabschnitt; sie sind keine Voraussetzung für die ersten drei Übungen. Verbindliche Abgabeumfänge nennt die Lehrveranstaltung.
 
