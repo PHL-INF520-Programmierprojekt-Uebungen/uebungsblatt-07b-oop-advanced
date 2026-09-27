@@ -1,13 +1,31 @@
-# Übungsblatt: Objektorientierte Programmierung - Fortgeschrittene Konzepte
-[Link to English version](./README_en.md)
+# Übungsblatt: Objektorientierte Programmierung – Abstraktion und Interfaces
 
-In diesem Übungsblatt lernen Sie, objektorientierten Quellcode zur Lösung verschiedener Aufgaben zu entwickeln.
+Voraussetzungen: konkrete Vererbung, Überschreiben und Zusammensetzung aus ÜB 07a. Beginnen Sie mit dem Mitarbeiterbeispiel. Die Fahrzeuge festigen dieselben Konzepte. Danach vergleichen Sie diese mit einem Interface beim Strategy-Muster. Generics bilden einen eigenständigen Vertiefungsabschnitt; sie sind keine Voraussetzung für die ersten drei Übungen. Verbindliche Abgabeumfänge nennt die Lehrveranstaltung.
 
-## Übung 1: Vererbung (`Vehicles` - Fahrzeuge)
+## Übung 1: Abstrakte Klassen und Polymorphismus (`Employee` - Mitarbeiter)
+
+Erstellen Sie ein Java-Programm, das die Verwendung von Polymorphismus in der objektorientierten Programmierung im Kontext eines Mitarbeiterverwaltungssystems demonstriert.
+Implementieren Sie die Klassen im Paket `de.phl.programmingproject.employee`.
 
 ### Aufgaben
 
-Erstellen Sie eine Reihe von Klassen, um verschiedene Arten von Fahrzeugen darzustellen. Alle Fahrzeuge haben eine Marke (`make`), ein Modell (`model`), ein Jahr (`year`) und ein Gewicht (`weight`). 
+Das Programm sollte aus den folgenden Klassen bestehen:
+
+1. Eine abstrakte Klasse namens `Employee` mit dem folgenden Attribut:
+   - `String name`: der Name des Mitarbeiters.
+     Die `Employee` Klasse sollte auch eine abstrakte Operation namens `calculatePay()` haben, die die Bezahlung des Mitarbeiters basierend auf seinem Gehalt zurückgibt.
+
+2. Zwei Unterklassen, die die `Employee` Klasse erweitern:
+   - `SalariedEmployee`, die ein Attribut `double salary` (Jahresgehalt) hat, um das Gehalt des Mitarbeiters zu speichern, und einen Konstruktor, der die Parameter `name` und `salary` akzeptiert. Die Klasse soll die Operation `calculatePay()` implementieren, um das monatliche Gehalt des Mitarbeiters zu berechnen, indem es das Jahresgehalt durch 12 teilt.
+   - `HourlyEmployee`, die einen Konstruktor hat, der die Parameter `name` und `hourlyRate` akzeptiert. Darüber hinaus hat die Klasse die zusätzlichen Attribute `int hoursWorked` für die gearbeiteten Stunden des Mitarbeiters und `double hourlyRate` zur Speicherung des stündlichen Gehalts des Mitarbeiters. Implementieren Sie die Operation `calculatePay()`, um das Gehalt des Mitarbeiters zu berechnen, indem Sie den stündlichen Satz mit den gearbeiteten Stunden multiplizieren. Um die gearbeiteten Stunden des Mitarbeiters hinzuzufügen, implementieren Sie die Operation `addHoursWorked(int hours)`.
+
+3. Eine `Main` Klasse, die eine `main()` Operation enthält. In der `main()` Operation sollen Sie eine Liste von `Employee`-Objekten erstellen, die mindestens einen `SalariedEmployee` und mindestens einen `HourlyEmployee` enthält. Durchlaufen Sie die Liste (bzw. iterieren Sie über die Liste) und rufen Sie die `calculatePay()` Operation für jedes Objekt auf. Geben Sie den Namen des Mitarbeiters und sein Gehalt auf der Konsole aus.
+
+## Übung 2: Vertiefung abstrakter Klassen (`Vehicles` - Fahrzeuge)
+
+### Aufgaben
+
+Erstellen Sie eine Reihe von Klassen, um verschiedene Arten von Fahrzeugen darzustellen. Alle Fahrzeuge haben eine Marke (`make`), ein Modell (`model`), ein Jahr (`year`) und ein Gewicht (`weight`).
 Einige Fahrzeuge haben auch zusätzliche Eigenschaften. Zum Beispiel hat ein Auto (`car`) eine Anzahl von Türen (`doors`) und ein Lastwagen (`truck`) hat eine Ladungskapazität (`cargoCapacity`).
 Verwenden Sie Vererbung, um eine Hierarchie von Fahrzeugklassen zu erstellen, wobei eine Basisklasse die gemeinsamen Attribute und Operationen darstellt und abgeleitete Klassen die spezifischen Arten von Fahrzeugen darstellen.
 
@@ -40,12 +58,45 @@ Implementieren Sie die Klassen im Paket `de.phl.programmingproject.vehicles`.
 
 5. Implementieren Sie die `main` Operation in der Klasse `Main`, um Instanzen jedes Fahrzeugs zu erstellen und deren Kilometerstand und Kraftstoffart auszugeben. Sie können auch andere Attribute zusätzlich ausgeben.
 
-## Übung 2: Generics und Collections (`ShoppingCart` - Einkaufswagen)
+
+## Übung 3: Implementierung des Strategy Design Pattern in Java
+
+In dieser Übung üben wir die Implementierung des Strategy Design Pattern in Java. Wir verwenden ein einfaches Beispiel eines Spiels, in dem ein&ast;e Spieler&ast;in zwischen verschiedenen Waffen wählen kann, um einen Feind anzugreifen. Der/die Spieler&ast;in kann zur Laufzeit zwischen den Waffen wechseln, und jede Waffe hat eine andere Angriffsstrategie.
+Um diese Übung zu lösen, erstellen Sie ein neues Paket `de.phl.programmingproject.strategydesign` und implementieren Sie die Klassen darin.
+
+### Aufgaben
+
+1. Erstellen Sie ein `Interface` namens `AttackStrategy` mit einer einzigen Operation `attack()`. Diese Operation sollte keine Argumente nehmen und `void` zurückgeben.
+2. Erstellen Sie drei Klassen, die das Interface `AttackStrategy` implementieren: `SwordAttackStrategy`, `AxeAttackStrategy` und `BowAttackStrategy`. Jede Klasse sollte ihre eigene Implementierung der Operation `attack()` haben. Zum Beispiel könnte `SwordAttackStrategy` einen Schwertangriff verwenden, während `BowAttackStrategy` einen Bogen und Pfeil verwenden könnte. Als Implementierung geben Sie den jeweiligen Angriff auf der Konsole aus, z.B. "Ein mächtiger Schwertangriff!" für die `SwordAttackStrategy`.
+3. Erstellen Sie eine Klasse namens `Player`, die ein privates Attribut `strategy` vom Typ `AttackStrategy` und eine public Operation namens `attack()` hat. Diese Operation sollte einfach die Operation `attack()` des aktuellen Angriffsstrategie-Objekts aufrufen.
+   * Implementieren Sie einen Konstruktor, der ein `AttackStrategy`-Objekt als Argument nimmt und das Attribut `strategy` auf diesen Wert setzt.
+4. Fügen Sie der Klasse `Player` eine public Operation namens `changeAttackStrategy(final AttackStrategy strategy)` hinzu. Diese Operation sollte ein Argument vom Typ `AttackStrategy` nehmen und das Attribut auf diesen Wert setzen.
+5. Erstellen Sie eine `Main`-Klasse. In der `main()`-Operation erstellen Sie ein `Player`-Objekt und setzen dessen Angriffsstrategie auf eine `SwordAttackStrategy`. Dann rufen Sie die Operation `attack()` des `Player`-Objekts auf. Überprüfen Sie, ob die richtige Angriffsstrategie verwendet wird.
+6. Ändern Sie die Angriffsstrategie des `Player`-Objekts auf eine `AxeAttackStrategy`. Rufen Sie die Operation `attack()` erneut auf und überprüfen Sie, ob die richtige Angriffsstrategie verwendet wird.
+7. Ändern Sie die Angriffsstrategie des `Player`-Objekts auf eine `BowAttackStrategy`. Rufen Sie die Operation `attack()` erneut auf und überprüfen Sie, ob die richtige Angriffsstrategie verwendet wird.
+8. Erstellen Sie eine neue Klasse namens `Enemy` mit einer public Operation namens `takeDamage(int damage)`. Diese Operation sollte einfach eine Nachricht auf der Konsole ausgeben, die anzeigt, dass der Feind den angegebenen Schaden genommen hat.
+9. Ändern Sie die Operation `attack()` der Klasse `Player`, sodass die Methode ein Argument vom Typ `Enemy` akzeptiert. Wenn die Operation `attack()` aufgerufen wird, sollte sie die Operation `takeDamage()` des `Enemy`-Objekts aufrufen und einen zufälligen Wert zwischen 1 und 10 als Schadensmenge übergeben.
+10. Ändern Sie die `main`-Methode. Erstellen Sie ein `Enemy`-Objekt und übergeben Sie es der Operation `attack()` des `Player`-Objekts. Überprüfen Sie, ob der Feind Schaden nimmt und ob die richtige Angriffsstrategie verwendet wird.
+
+
+
+### Vergleich: abstrakte Klasse und Interface
+
+| Frage | Abstrakte Klasse `Employee` | Interface `AttackStrategy` |
+|---|---|---|
+| Was wird gemeinsam beschrieben? | Eine Familie von Mitarbeitenden mit gemeinsamem Namen und unterschiedlicher Bezahlungsberechnung | Eine austauschbare Fähigkeit zum Angreifen |
+| Wo liegt gemeinsamer Objektzustand? | In der Basisklasse, initialisiert durch ihren Konstruktor | In den implementierenden Klassen; das Interface hat keinen eigenen Instanzzustand |
+| Wie wird erweitert? | Eine Klasse kann genau eine direkte Oberklasse erweitern | Eine Klasse kann mehrere Interfaces implementieren |
+| Wie wird das Verhalten ausgewählt? | Die konkrete Unterklasse bestimmt die Implementierung | `Player` delegiert an das aktuell eingesetzte Strategieobjekt |
+
+Begründen Sie anhand Ihrer Programme, warum `Player` seine Strategie durch Zusammensetzung erhält. Eine abstrakte Klasse kann auch konkrete Methoden enthalten; Interfaces können unter anderem `default`-Methoden anbieten. Entscheidend sind hier gemeinsamer Zustand und die Rolle, die der Typ beschreibt.
+
+## Übung 4: Eigenständige Vertiefung – Generics und Collections (`ShoppingCart` - Einkaufswagen)
 
 In dieser Übung üben Sie die Verwendung von Generics und Collections in Java, indem Sie einen Einkaufswagen für einen Online-Shop implementieren.
 Implementieren Sie die Klassen im Paket `de.phl.programmingproject.shoppingcart`.
 
-Erstellen Sie eine Klasse `ShoppingCart`, die einen Einkaufswagen für einen Online-Shop darstellt und Generics verwendet, um den Typ der Artikel zur Laufzeit festzulegen. Daher sollte die Klasse `T` als Typparameter auf Klassenebene unterstützen. Dieser Einkaufswagen sollte die folgenden Operationen unterstützen:
+Erstellen Sie eine Klasse `ShoppingCart`, die einen Einkaufswagen für einen Online-Shop darstellt und Generics verwendet, um den Typ der Artikel zur Übersetzungszeit prüfen zu lassen. Daher sollte die Klasse `T` als Typparameter auf Klassenebene unterstützen. Dieser Einkaufswagen sollte die folgenden Operationen unterstützen:
 
 1. `void addItem(T item)`: Fügt den angegebenen Artikel zum Warenkorb hinzu.
 2. `void removeItem(T item)`: Entfernt den angegebenen Artikel aus dem Warenkorb.
@@ -64,25 +115,3 @@ Um Ihre Implementierung zu testen, implementieren Sie die `main` Operation, soda
 5. Ruft die Operation `removeItem` auf, um einen bestimmten Artikel aus dem Warenkorb zu entfernen.
 6. Ruft die Operation `getCartItems` auf, um eine Liste aller Artikel im Warenkorb zu erhalten und gibt das Ergebnis aus.
 7. Wiederholt zusätzlich Aufgaben 1 bis 6 mit einer neuen `ShoppingCart`-Instanz und einem anderen Typ, der nicht `String` ist.
-
-
-## Übung 3: Implementierung des Strategy Design Pattern in Java
-
-In dieser Übung üben wir die Implementierung des Strategy Design Pattern in Java. Wir verwenden ein einfaches Beispiel eines Spiels, in dem ein&ast;e Spieler&ast;in zwischen verschiedenen Waffen wählen kann, um einen Feind anzugreifen. Der/die Spieler&ast;in kann zur Laufzeit zwischen den Waffen wechseln, und jede Waffe hat eine andere Angriffsstrategie.
-Um diese Übung zu lösen, erstellen Sie ein neues Paket `de.phl.programmingproject.strategydesign` und implementieren Sie die Klassen darin.
-
-### Aufgaben
-
-1. Erstellen Sie ein `Interface` namens `AttackStrategy` mit einer einzigen Operation `attack()`. Diese Operation sollte keine Argumente nehmen und `void` zurückgeben.
-2. Erstellen Sie drei Klassen, die das Interface `AttackStrategy` implementieren: `SwordAttackStrategy`, `AxeAttackStrategy` und `BowAttackStrategy`. Jede Klasse sollte ihre eigene Implementierung der Operation `attack()` haben. Zum Beispiel könnte `SwordAttackStrategy` einen Schwertangriff verwenden, während `BowAttackStrategy` einen Bogen und Pfeil verwenden könnte. Als Implementierung geben Sie den jeweiligen Angriff auf der Konsole aus, z.B. "Ein mächtiger Schwertangriff!" für die `SwordAttackStrategy`.
-3. Erstellen Sie eine Klasse namens `Player`, die ein privates Attribut `strategy` vom Typ `AttackStrategy` und eine public Operation namens `attack()` hat. Diese Operation sollte einfach die Operation `attack()` des aktuellen Angriffsstrategie-Objekts aufrufen.
-   * Implementieren Sie einen Konstruktor, der ein `AttackStrategy`-Objekt als Argument nimmt und das Attribut `strategy` auf diesen Wert setzt.
-4. Fügen Sie der Klasse `Player` eine public Operation namens `changeAttackStrategy(final strategy AttackStrategy)` hinzu. Diese Operation sollte ein Argument vom Typ `AttackStrategy` nehmen und das Attribut auf diesen Wert setzen.
-5. Erstellen Sie eine `Main`-Klasse. In der `main()`-Operation erstellen Sie ein `Player`-Objekt und setzen dessen Angriffsstrategie auf eine `SwordAttackStrategy`. Dann rufen Sie die Operation `attack()` des `Player`-Objekts auf. Überprüfen Sie, ob die richtige Angriffsstrategie verwendet wird.
-6. Ändern Sie die Angriffsstrategie des `Player`-Objekts auf eine `AxeAttackStrategy`. Rufen Sie die Operation `attack()` erneut auf und überprüfen Sie, ob die richtige Angriffsstrategie verwendet wird.
-7. Ändern Sie die Angriffsstrategie des `Player`-Objekts auf eine `BowAttackStrategy`. Rufen Sie die Operation `attack()` erneut auf und überprüfen Sie, ob die richtige Angriffsstrategie verwendet wird.
-8. Erstellen Sie eine neue Klasse namens `Enemy` mit einer public Operation namens `takeDamage(int damage)`. Diese Operation sollte einfach eine Nachricht auf der Konsole ausgeben, die anzeigt, dass der Feind den angegebenen Schaden genommen hat.
-9. Ändern Sie die Operation `attack()` der Klasse `Player`, sodass die Methode ein Argument vom Typ `Enemy` akzeptiert. Wenn die Operation `attack()` aufgerufen wird, sollte sie die Operation `takeDamage()` des `Enemy`-Objekts aufrufen und einen zufälligen Wert zwischen 1 und 10 als Schadensmenge übergeben.
-10. Ändern Sie die `main`-Methode. Erstellen Sie ein `Enemy`-Objekt und übergeben Sie es der Operation `attack()` des `Player`-Objekts. Überprüfen Sie, ob der Feind Schaden nimmt und ob die richtige Angriffsstrategie verwendet wird.
-
-Herzlichen Glückwunsch, Sie haben das Strategy Design Pattern in Java erfolgreich implementiert!
