@@ -1,6 +1,10 @@
 # Übungsblatt: Objektorientierte Programmierung – Abstraktion und Interfaces
 [Link to English version](./README_en.md)
 
+[![In GitHub Codespaces öffnen](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new)
+
+**Im Browser arbeiten:** Wählen Sie nach dem Klick unter **Repository** Ihr eigenes Repository aus (der Name endet auf Ihren GitHub-Benutzernamen), nicht die Vorlage. Alternativ öffnen Sie Ihr Repository auf GitHub und wählen **Code → Codespaces → Create codespace on main**. Wie Sie lokal arbeiten und die Tests starten, steht in [TESTEN.md](./TESTEN.md).
+
 Voraussetzungen: konkrete Vererbung, Überschreiben und Zusammensetzung aus ÜB 07a. Beginnen Sie mit dem Mitarbeiterbeispiel. Die Fahrzeuge festigen dieselben Konzepte. Danach vergleichen Sie diese mit einem Interface beim Strategy-Muster. Generics bilden einen eigenständigen Vertiefungsabschnitt; sie sind keine Voraussetzung für die ersten drei Übungen. Verbindliche Abgabeumfänge nennt die Lehrveranstaltung.
 
 ## Übung 1: Abstrakte Klassen und Polymorphismus (`Employee` - Mitarbeiter)
